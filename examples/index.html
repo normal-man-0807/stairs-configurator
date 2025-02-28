@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
+    />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+  <body>
+    <canvas id="canvas" />
+    <script src="js/stair_min.js"></script>
+    <script>
+      const canvas = document.getElementById('canvas');
+      const simulator = new STAIR.StairSimulator(canvas);
+
+      simulator.on('started', () => {
+        drawHalfTurn();
+      });
+
+      // set dimensions when wrapper element is resized
+      simulator.setSize(800, 600);
+
+      // feature_turn:  | 'lbs'  | 'rbs' | 'dbs' | 'lds' | 'rds' | 'dds' | 'lcs' | 'rcs' | 'dcs' | 'lcbs'| 'rcbs' | 'dcbs'
+
+      function drawStraightFlight() {
+        simulator.drawStraightFlight({
+          stair_width: 900,
+          floor_height: 2600,
+          stair_going: 240,
+          feature_turn: 'lbs',
+          post: {
+            direction: {
+              leftTop: true,
+              leftBottom: true,
+              rightTop: true,
+              rightBottom: true,
+            },
+            type: 'CHAMFERED',
+            material: 'PINE',
+          },
+          caps: {
+            direction: {
+              leftTop: true,
+              leftBottom: true,
+              rightTop: true,
+              rightBottom: true,
+            },
+            type: 'PYRAMID',
+            material: 'PINE',
+          },
+          handrails: {
+            direction: {
+              left: true,
+              right: true,
+            },
+            type: 'EDWARDIAN',
+            material: 'PINE',
+            baseMaterial: 'PINE',
+          },
+        });
+      }
+
+      function drawQuarterTurn() {
+        simulator.drawQuarterTurn({
+          stair_width: 900,
+          floor_height: 2600,
+          stair_going: 240,
+          direction: 'LEFT',
+          feature_turn: 'lbs',
+          section1: {
+            num: 5,
+            width: 300,
+            caps: {
+              type: 'PYRAMID',
+              material: 'PINE',
+              direction: {
+                left: true,
+                right: true,
+              },
+            },
+            post: {
+              type: 'CHAMFERED',
+              material: 'PINE',
+              direction: {
+                left: true,
+                right: true,
+              },
+            },
+            handrails: {
+              type: 'EDWARDIAN',
+              material: 'PINE',
+              baseMaterial: 'PINE',
+              direction: {
+                left: true,
+                right: true,
+              },
+            },
+          },
+          section2: {
+            num: 5,
+            width: 300,
+            caps: {
+              type: 'PYRAMID',
+              material: 'PINE',
+              direction: {
+                left: true,
+                right: true,
+              },
+            },
+            post: {
+              type: 'CHAMFERED',
+              material: 'PINE',
+              direction: {
+                left: true,
+                right: true,
+              },
+            },
+            handrails: {
+              type: 'EDWARDIAN',
+              material: 'PINE',
+              baseMaterial: 'PINE',
+              direction: {
+                left: true,
+                right: true,
+              },
+            },
+          },
+          box: {
+            tnum: 4,
+            post: {
+              direction: {
+                bottom: true,
+                top: true,
+                corner: true,
+              },
+            },
+            handrails: {
+              direction: {
+                left: true,
+                right: true,
+              },
+            },
+          },
+        });
+      }
+
+      function drawHalfTurn() {
+        simulator.drawHalfTurn({
+          stair_width: 900,
+          floor_height: 2600,
+          stair_going: 240,
+          direction: 'LEFT',
+          feature_turn: 'lbs',
+          section1: {
+            num: 2,
+            width: 900,
+            caps: {
+              type: 'PYRAMID',
+              material: 'PINE',
+              direction: {
+                left: true,
+                right: true,
+              },
+            },
+            post: {
+              type: 'CHAMFERED',
+              material: 'PINE',
+              direction: {
+                left: true,
+                right: true,
+              },
+            },
+            handrails: {
+              type: 'EDWARDIAN',
+              material: 'PINE',
+              baseMaterial: 'PINE',
+              direction: {
+                left: true,
+                right: true,
+              },
+            },
+          },
+          section2: {
+            num: 2,
+            width: 900,
+            caps: {
+              type: 'PYRAMID',
+              material: 'PINE',
+              direction: {
+                left: true,
+                right: true,
+              },
+            },
+            post: {
+              type: 'CHAMFERED',
+              material: 'PINE',
+              direction: {
+                left: true,
+                right: true,
+              },
+            },
+            handrails: {
+              type: 'EDWARDIAN',
+              material: 'PINE',
+              baseMaterial: 'PINE',
+              direction: {
+                left: true,
+                right: true,
+              },
+            },
+          },
+          section3: {
+            num: 5,
+            width: 900,
+            caps: {
+              type: 'PYRAMID',
+              material: 'PINE',
+              direction: {
+                left: true,
+                right: true,
+              },
+            },
+            post: {
+              type: 'CHAMFERED',
+              material: 'PINE',
+              direction: {
+                left: true,
+                right: true,
+              },
+            },
+            handrails: {
+              type: 'EDWARDIAN',
+              material: 'PINE',
+              baseMaterial: 'PINE',
+              direction: {
+                left: true,
+                right: true,
+              },
+            },
+          },
+          box1: {
+            tnum: 2,
+            post: {
+              direction: {
+                bottom: true,
+                top: true,
+                corner: true,
+              },
+            },
+            handrails: {
+              direction: {
+                left: true,
+                right: true,
+              },
+            },
+          },
+          box2: {
+            tnum: 2,
+            post: {
+              direction: {
+                bottom: true,
+                top: true,
+                corner: true,
+              },
+            },
+            handrails: {
+              direction: {
+                left: true,
+                right: true,
+              },
+            },
+          },
+        });
+      }
+    </script>
+  </body>
+</html>

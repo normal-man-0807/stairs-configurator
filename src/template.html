@@ -1,0 +1,1794 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+  <meta charset='UTF-8' />
+  <meta http-equiv='X-UA-Compatible' content='IE=edge' />
+  <meta name='viewport' content='width=device-width, initial-scale=1.0' />
+  <link
+    href='https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css'
+    rel='stylesheet'
+    integrity='sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD'
+    crossorigin='anonymous'
+  />
+  <title>Stair Configuration</title>
+</head>
+<body>
+<canvas id='canvas'></canvas>
+<div id='control_wrapper'>
+  <ul class='nav nav-tabs' id='myTab' role='tablist'>
+    <li class='nav-item' role='presentation'>
+      <button
+        class='nav-link '
+        id='straightflight-tab'
+        data-bs-toggle='tab'
+        data-bs-target='#straightflight-tab-pane'
+        type='button'
+        role='tab'
+        aria-controls='straightflight-tab-pane'
+        aria-selected='false'
+      >
+        Straight Flight
+      </button>
+    </li>
+    <li class='nav-item' role='presentation'>
+      <button
+        class='nav-link '
+        id='quarterturn-tab'
+        data-bs-toggle='tab'
+        data-bs-target='#quarterturn-tab-pane'
+        type='button'
+        role='tab'
+        aria-controls='quarterturn-tab-pane'
+        aria-selected='false'
+      >
+        Quarter Turn
+      </button>
+    </li>
+    <li class='nav-item' role='presentation'>
+      <button
+        class='nav-link active'
+        id='halfturn-tab'
+        data-bs-toggle='tab'
+        data-bs-target='#halfturn-tab-pane'
+        type='button'
+        role='tab'
+        aria-controls='halfturn-tab-pane'
+        aria-selected='true'
+      >
+        Half Turn
+      </button>
+    </li>
+  </ul>
+  <div class='tab-content' id='myTabContent'>
+    <div
+      class='tab-pane fade'
+      id='straightflight-tab-pane'
+      role='tabpanel'
+      aria-labelledby='straightflight-tab'
+      tabindex='0'
+    >
+      <div class='row p-3'>
+        <div class='mb-3 col-3 row'>
+          <div class='mb-3 row'>
+            <label for='straight_width' class='col-sm-2 col-form-label'
+            >Width</label
+            >
+            <div class='col-sm-10'>
+              <input
+                type='number'
+                class='form-control'
+                id='straight_width'
+                value='900'
+              />
+            </div>
+          </div>
+          <div class='mb-3 row'>
+            <label for='straight_height' class='col-sm-2 col-form-label'
+            >Height</label
+            >
+            <div class='col-sm-10'>
+              <input
+                type='number'
+                class='form-control'
+                id='straight_height'
+                value='2600'
+              />
+            </div>
+          </div>
+          <div class='mb-3 row'>
+            <label for='straight_going' class='col-sm-2 col-form-label'
+            >Going</label
+            >
+            <div class='col-sm-10'>
+              <input
+                type='number'
+                class='form-control'
+                id='straight_going'
+                value='240'
+              />
+            </div>
+          </div>
+          <div class='mb-3 row'>
+            <label
+              for='feature_tread_straight'
+              class='col-sm-2 col-form-label'
+            >Feature Tread</label
+            >
+            <div class='col-sm-10'>
+              <select id='feature_tread_straight' class='form-select'>
+                <option value='n' selected>None</option>
+                <option value='lbs' selected>Left Bullnose Step</option>
+                <option value='rbs'>Right Bullnose Step</option>
+                <option value='dbs'>Double Bullnose Step</option>
+                <option value='lds'>Left D Step</option>
+                <option value='rds'>Right D Step</option>
+                <option value='dds'>Double D Step</option>
+                <option value='lcs'>Left Curtail Step</option>
+                <option value='rcs'>Right Curtail Step</option>
+                <option value='dcs'>Double Curtail Step</option>
+                <option value='lcbs'>Left Curtail and Bullnose Step</option>
+                <option value='rcbs'>
+                  Right Curtail and Bullnose Step
+                </option>
+                <option value='dcbs'>
+                  Double Curtail and Bullnose Step
+                </option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class='mb-3 col-3 row'>
+          <legend class='col-form-label col-sm-2 pt-0'>Posts</legend>
+          <div class='col-sm-5'>
+            <div class='form-check'>
+              <input
+                class='form-check-input'
+                type='checkbox'
+                name='gridRadios'
+                id='posts_top_left_straight'
+                value='option1'
+                checked
+              />
+              <label class='form-check-label' for='posts_top_left_straight'>
+                Top-left
+              </label>
+            </div>
+            <div class='form-check'>
+              <input
+                class='form-check-input'
+                type='checkbox'
+                name='gridRadios'
+                id='posts_bottom_left_straight'
+                value='option3'
+                checked
+              />
+              <label
+                class='form-check-label'
+                for='posts_bottom_left_straight'
+              >
+                Bottom-Left
+              </label>
+            </div>
+            <div class='form-check'>
+              <input
+                class='form-check-input'
+                type='checkbox'
+                name='gridRadios'
+                id='posts_top_right_straight'
+                value='option2'
+              />
+              <label
+                class='form-check-label'
+                for='posts_top_right_straight'
+              >
+                Top-Right
+              </label>
+            </div>
+            <div class='form-check disabled'>
+              <input
+                class='form-check-input'
+                type='checkbox'
+                name='gridRadios'
+                id='posts_bottom_right_straight'
+                value='option3'
+              />
+              <label
+                class='form-check-label'
+                for='posts_bottom_right_straight'
+              >
+                Bottom-Right
+              </label>
+            </div>
+          </div>
+          <div class='col-sm-5 row'>
+            <div class='col-md-12'>
+              <label for='post_type_straight' class='form-label'
+              >Type</label
+              >
+              <select id='post_type_straight' class='form-select'>
+                <option value='SQUARE' selected>SQUARE</option>
+                <option value='CHAMFERED'>CHAMFERED</option>
+                <option value='TURNED'>TURNED</option>
+                <option value='BASE'>BASE</option>
+              </select>
+            </div>
+            <div class='col-md-12'>
+              <label for='post_material_straight' class='form-label'
+              >Material</label
+              >
+              <select id='post_material_straight' class='form-select'>
+                <option value='OAK'>OAK</option>
+                <option value='PINE' selected>PINE</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class='mb-3 col-3 row'>
+          <legend class='col-form-label col-sm-2 pt-0'>Caps</legend>
+          <div class='col-sm-5'>
+            <div class='form-check'>
+              <input
+                class='form-check-input'
+                type='checkbox'
+                name='gridRadios'
+                id='caps_top_left_straight'
+                value='option1'
+                checked
+              />
+              <label class='form-check-label' for='caps_top_left_straight'>
+                Top-left
+              </label>
+            </div>
+            <div class='form-check'>
+              <input
+                class='form-check-input'
+                type='checkbox'
+                name='gridRadios'
+                id='caps_top_right_straight'
+                value='option2'
+              />
+              <label class='form-check-label' for='caps_top_right_straight'>
+                Top-Right
+              </label>
+            </div>
+            <div class='form-check disabled'>
+              <input
+                class='form-check-input'
+                type='checkbox'
+                name='gridRadios'
+                id='caps_bottom_left_straight'
+                value='option3'
+                checked
+              />
+              <label
+                class='form-check-label'
+                for='caps_bottom_left_straight'
+              >
+                Bottom-Left
+              </label>
+            </div>
+            <div class='form-check disabled'>
+              <input
+                class='form-check-input'
+                type='checkbox'
+                name='gridRadios'
+                id='caps_bottom_right_straight'
+                value='option3'
+              />
+              <label
+                class='form-check-label'
+                for='caps_bottom_right_straight'
+              >
+                Bottom-Right
+              </label>
+            </div>
+          </div>
+          <div class='col-sm-5 row'>
+            <div class='col-md-12'>
+              <label for='caps_type_straight' class='form-label'
+              >Type</label
+              >
+              <select id='caps_type_straight' class='form-select'>
+                <option value='BALL' selected>Ball</option>
+                <option value='PYRAMID'>Pyramid</option>
+              </select>
+            </div>
+            <div class='col-md-12'>
+              <label for='cap_material_straight' class='form-label'
+              >Material</label
+              >
+              <select id='cap_material_straight' class='form-select'>
+                <option value='OAK'>OAK</option>
+                <option value='PINE' selected>PINE</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class='mb-3 col-3 row'>
+          <legend class='col-form-label col-sm-2 pt-0'>Spindles</legend>
+          <div class='col-sm-5'>
+            <div class='form-check'>
+              <input
+                class='form-check-input'
+                type='checkbox'
+                name='gridRadios'
+                id='spindle_left_straight'
+                value='option1'
+                checked
+              />
+              <label class='form-check-label' for='spindle_left_straight'>
+                Top-left
+              </label>
+            </div>
+            <div class='form-check'>
+              <input
+                class='form-check-input'
+                type='checkbox'
+                name='gridRadios'
+                id='spindle_right_straight'
+                value='option2'
+              />
+              <label class='form-check-label' for='spindle_right_straight'>
+                Top-Right
+              </label>
+            </div>
+          </div>
+          <div class='col-sm-5 row'>
+            <div class='col-md-12'>
+              <label for='spindle_type_straight' class='form-label'
+              >Type</label
+              >
+              <select id='spindle_type_straight' class='form-select'>
+                <option value='CHAMFERED' selected>CHAMFERED</option>
+                <option value='EDWARDIAN'>EDWARDIAN</option>
+                <option value='TWIST'>TWIST</option>
+                <option value='FLUTED'>FLUTED</option>
+                <option value='TULIP'>TULIP</option>
+                <option value='VICTORIAN'>VICTORIAN</option>
+                <option value='PROVINCIAL'>PROVINCIAL</option>
+              </select>
+            </div>
+            <div class='col-md-12'>
+              <label for='spindle_material_straight' class='form-label'
+              >Spindle Material</label
+              >
+              <select id='spindle_material_straight' class='form-select'>
+                <option value='OAK'>OAK</option>
+                <option value='PINE' selected>PINE</option>
+              </select>
+            </div>
+            <div class='col-md-12'>
+              <label for='base_rail_material_straight' class='form-label'
+              >Base Rail Material</label
+              >
+              <select id='base_rail_material_straight' class='form-select'>
+                <option value='OAK'>OAK</option>
+                <option value='PINE' selected>PINE</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <button id='create_straight_stair'>Generate</button>
+      </div>
+    </div>
+    <div
+      class='tab-pane fade'
+      id='quarterturn-tab-pane'
+      role='tabpanel'
+      aria-labelledby='quarterturn-tab'
+      tabindex='1'
+    >
+      <div class='row p-3'>
+        <div class='mb-1 col-2 row'>
+          <div class='mb-1 row'>
+            <label for='quarter_turn_width' class='col-sm-4 col-form-label'
+            >Width</label
+            >
+            <div class='col-sm-8'>
+              <input
+                type='number'
+                class='form-control'
+                id='quarter_turn_width'
+                value='900'
+              />
+            </div>
+          </div>
+          <div class='mb-1 row'>
+            <label for='quarter_turn_height' class='col-sm-4 col-form-label'
+            >Height</label
+            >
+            <div class='col-sm-8'>
+              <input
+                type='number'
+                class='form-control'
+                id='quarter_turn_height'
+                value='2600'
+              />
+            </div>
+          </div>
+          <div class='mb-1 row'>
+            <label for='quarter_turn_going' class='col-sm-4 col-form-label'
+            >Going</label
+            >
+            <div class='col-sm-8'>
+              <input
+                type='number'
+                class='form-control'
+                id='quarter_turn_going'
+                value='240'
+              />
+            </div>
+          </div>
+          <div class='mb-1 row'>
+            <label for='direction_quarter' class='col-sm-4 col-form-label'
+            >Direction</label
+            >
+            <div class='col-sm-8'>
+              <select id='direction_quarter' class='form-select'>
+                <option value='LEFT' selected>LEFT</option>
+                <option value='RIGHT'>RIGHT</option>
+              </select>
+            </div>
+          </div>
+          <div class='mb-1 row'>
+            <label
+              for='feature_tread_quarter'
+              class='col-sm-4 col-form-label'
+            >Feature Tread</label
+            >
+            <div class='col-sm-8'>
+              <select id='feature_tread_quarter' class='form-select'>
+                <option value='n'>None</option>
+                <option value='lbs' selected>Left Bullnose Step</option>
+                <option value='rbs'>Right Bullnose Step</option>
+                <option value='dbs'>Double Bullnose Step</option>
+                <option value='lds'>Left D Step</option>
+                <option value='rds'>Right D Step</option>
+                <option value='dds'>Double D Step</option>
+                <option value='lcs'>Left Curtail Step</option>
+                <option value='rcs'>Right Curtail Step</option>
+                <option value='dcs'>Double Curtail Step</option>
+                <option value='lcbs'>Left Curtail and Bullnose Step</option>
+                <option value='rcbs'>
+                  Right Curtail and Bullnose Step
+                </option>
+                <option value='dcbs'>
+                  Double Curtail and Bullnose Step
+                </option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class='mb-1 col-2 row'>
+          <div class='mb-1 row'>
+            <label for='post_type_quarter' class='col-sm-4 col-form-label'
+            >POST</label
+            >
+            <div class='col-sm-8'>
+              <select id='post_type_quarter' class='form-select'>
+                <option value='SQUARE' selected>SQUARE</option>
+                <option value='CHAMFERED'>CHAMFERED</option>
+                <option value='TURNED'>TURNED</option>
+                <option value='BASE'>BASE</option>
+              </select>
+            </div>
+          </div>
+          <div class='mb-1 row'>
+            <label for='caps_type_quarter' class='col-sm-4 col-form-label'
+            >Cap</label
+            >
+            <div class='col-sm-8'>
+              <select id='caps_type_quarter' class='form-select'>
+                <option value='BALL' selected>Ball</option>
+                <option value='PYRAMID'>Pyramid</option>
+              </select>
+            </div>
+          </div>
+          <div class='mb-1 row'>
+            <label for='spindle_type_quarter' class='col-sm-4 col-form-label'
+            >Spindle</label
+            >
+            <div class='col-sm-8'>
+              <select id='spindle_type_quarter' class='form-select'>
+                <option value='CHAMFERED' selected>CHAMFERED</option>
+                <option value='EDWARDIAN'>EDWARDIAN</option>
+                <option value='TWIST'>TWIST</option>
+                <option value='FLUTED'>FLUTED</option>
+                <option value='TULIP'>TULIP</option>
+                <option value='VICTORIAN'>VICTORIAN</option>
+                <option value='PROVINCIAL'>PROVINCIAL</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class='mb-1 col-2 row'>
+          <div class='mb-1 row'>
+            <label for='post_material_quarter' class='col-sm-4 col-form-label'
+            >POST</label
+            >
+            <div class='col-sm-8'>
+              <select id='post_material_quarter' class='form-select'>
+                <option value='OAK'>OAK</option>
+                <option value='PINE' selected>PINE</option>
+              </select>
+            </div>
+          </div>
+          <div class='mb-1 row'>
+            <label for='cap_material_quarter' class='col-sm-4 col-form-label'
+            >CAP</label
+            >
+            <div class='col-sm-8'>
+              <select id='cap_material_quarter' class='form-select'>
+                <option value='OAK'>OAK</option>
+                <option value='PINE' selected>PINE</option>
+              </select>
+            </div>
+          </div>
+          <div class='mb-1 row'>
+            <label
+              for='spindle_material_quarter'
+              class='col-sm-4 col-form-label'
+            >SPINDLE</label
+            >
+            <div class='col-sm-8'>
+              <select id='spindle_material_quarter' class='form-select'>
+                <option value='OAK'>OAK</option>
+                <option value='PINE' selected>PINE</option>
+              </select>
+            </div>
+          </div>
+          <div class='mb-1 row'>
+            <label
+              for='base_rail_material_quarter'
+              class='col-sm-4 col-form-label'
+            >BASE RAIL</label
+            >
+            <div class='col-sm-8'>
+              <select id='base_rail_material_quarter' class='form-select'>
+                <option value='OAK'>OAK</option>
+                <option value='PINE' selected>PINE</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class='mb-1 col-2 row'>
+          <p class='fs-6 fw-bold'>Section 1</p>
+          <div class='row'>
+            <div class='mb-1 row'>
+              <label for='quarter_start_num' class='col-sm-4 col-form-label'
+              >Count</label
+              >
+              <div class='col-sm-8'>
+                <input
+                  type='number'
+                  class='form-control'
+                  id='quarter_start_num'
+                  value='5'
+                />
+              </div>
+            </div>
+          </div>
+          <div class='row'>
+            <div class='col-4'>
+              <legend class='col-form-label col-sm-2 p-0'>Posts</legend>
+              <div class='form-check'>
+                <input
+                  class='form-check-input'
+                  type='checkbox'
+                  name='gridRadios'
+                  id='posts_left_section1_quarter'
+                  value='option1'
+                  checked
+                />
+                <label
+                  class='form-check-label'
+                  for='posts_left_section1_quarter'
+                >
+                  left
+                </label>
+              </div>
+              <div class='form-check'>
+                <input
+                  class='form-check-input'
+                  type='checkbox'
+                  name='gridRadios'
+                  id='posts_right_section1_quarter'
+                  value='option1'
+                  checked
+                />
+                <label
+                  class='form-check-label'
+                  for='posts_right_section1_quarter'
+                >
+                  Right
+                </label>
+              </div>
+            </div>
+            <div class='col-4'>
+              <legend class='col-form-label col-sm-2 p-0'>Caps</legend>
+              <div class='form-check'>
+                <input
+                  class='form-check-input'
+                  type='checkbox'
+                  name='gridRadios'
+                  id='caps_left_section1_quarter'
+                  value='option1'
+                  checked
+                />
+                <label
+                  class='form-check-label'
+                  for='caps_left_section1_quarter'
+                >
+                  left
+                </label>
+              </div>
+              <div class='form-check'>
+                <input
+                  class='form-check-input'
+                  type='checkbox'
+                  name='gridRadios'
+                  id='caps_right_section1_quarter'
+                  value='option1'
+                  checked
+                />
+                <label
+                  class='form-check-label'
+                  for='caps_right_section1_quarter'
+                >
+                  Right
+                </label>
+              </div>
+            </div>
+            <div class='col-4'>
+              <legend class='col-form-label col-sm-2 p-0'>Handrail</legend>
+              <div class='form-check'>
+                <input
+                  class='form-check-input'
+                  type='checkbox'
+                  name='gridRadios'
+                  id='spindles_left_section1_quarter'
+                  value='option1'
+                  checked
+                />
+                <label
+                  class='form-check-label'
+                  for='spindles_left_section1_quarter'
+                >
+                  left
+                </label>
+              </div>
+              <div class='form-check'>
+                <input
+                  class='form-check-input'
+                  type='checkbox'
+                  name='gridRadios'
+                  id='spindles_right_section1_quarter'
+                  value='option1'
+                  checked
+                />
+                <label
+                  class='form-check-label'
+                  for='spindles_right_section1_quarter'
+                >
+                  Right
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class='mb-1 col-2 row'>
+          <p class='fs-6 fw-bold'>Box</p>
+          <div class='row'>
+            <div class='mb-3 row'>
+              <label for='turn_quarter' class='col-sm-4 col-form-label'
+              >Turn</label
+              >
+              <div class='col-sm-8'>
+                <select id='turn_quarter' class='form-select'>
+                  <option value='1'>1</option>
+                  <option value='2'>2</option>
+                  <option value='3'>3</option>
+                  <option value='4' selected>4</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <div class='row'>
+            <div class='col-4'>
+              <legend class='col-form-label col-sm-2 p-0'>Posts</legend>
+              <div class='form-check'>
+                <input
+                  class='form-check-input'
+                  type='checkbox'
+                  name='gridRadios'
+                  id='posts_top_outside_box_quarter'
+                  value='option1'
+                  checked
+                />
+                <label
+                  class='form-check-label'
+                  for='posts_top_outside_box_quarter'
+                >
+                  Top OutSide
+                </label>
+              </div>
+              <div class='form-check'>
+                <input
+                  class='form-check-input'
+                  type='checkbox'
+                  name='gridRadios'
+                  id='posts_bottom_outside_box_quarter'
+                  value='option1'
+                  checked
+                />
+                <label
+                  class='form-check-label'
+                  for='posts_bottom_outside_box_quarter'
+                >
+                  Bottom Outside
+                </label>
+              </div>
+              <div class='form-check'>
+                <input
+                  class='form-check-input'
+                  type='checkbox'
+                  name='gridRadios'
+                  id='posts_corner_box_quarter'
+                  value='option1'
+                  checked
+                />
+                <label
+                  class='form-check-label'
+                  for='posts_corner_box_quarter'
+                >
+                  Corner
+                </label>
+              </div>
+            </div>
+            <div class='col-4'>
+              <legend class='col-form-label col-sm-2 p-0'>Caps</legend>
+              <div class='form-check'>
+                <input
+                  class='form-check-input'
+                  type='checkbox'
+                  name='gridRadios'
+                  id='caps_top_outside_box_quarter'
+                  value='option1'
+                  checked
+                />
+                <label
+                  class='form-check-label'
+                  for='caps_top_outside_box_quarter'
+                >
+                  Top OutSide
+                </label>
+              </div>
+              <div class='form-check'>
+                <input
+                  class='form-check-input'
+                  type='checkbox'
+                  name='gridRadios'
+                  id='caps_bottom_outside_box_quarter'
+                  value='option1'
+                  checked
+                />
+                <label
+                  class='form-check-label'
+                  for='caps_bottom_outside_box_quarter'
+                >
+                  Bottom Outside
+                </label>
+              </div>
+              <div class='form-check'>
+                <input
+                  class='form-check-input'
+                  type='checkbox'
+                  name='gridRadios'
+                  id='caps_corner_box_quarter'
+                  value='option1'
+                  checked
+                />
+                <label class='form-check-label' for='caps_corner_box_quarter'>
+                  Corner
+                </label>
+              </div>
+            </div>
+            <div class='col-4'>
+              <legend class='col-form-label col-sm-2 p-0'>Spindles</legend>
+              <div class='form-check'>
+                <input
+                  class='form-check-input'
+                  type='checkbox'
+                  name='gridRadios'
+                  id='spindles_left_box_quarter'
+                  value='option1'
+                  checked
+                />
+                <label
+                  class='form-check-label'
+                  for='spindles_left_box_quarter'
+                >
+                  Left
+                </label>
+              </div>
+              <div class='form-check'>
+                <input
+                  class='form-check-input'
+                  type='checkbox'
+                  name='gridRadios'
+                  id='spindles_right_box_quarter'
+                  value='option1'
+                  checked
+                />
+                <label
+                  class='form-check-label'
+                  for='spindles_right_box_quarter'
+                >
+                  Right
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class='mb-1 col-2 row'>
+          <p class='fs-6 fw-bold'>Section 2</p>
+          <div class='row'>
+            <div class='col-4'>
+              <legend class='col-form-label col-sm-2 p-0'>Posts</legend>
+              <div class='form-check'>
+                <input
+                  class='form-check-input'
+                  type='checkbox'
+                  name='gridRadios'
+                  id='posts_left_section2_quarter'
+                  value='option1'
+                  checked
+                />
+                <label
+                  class='form-check-label'
+                  for='posts_left_section2_quarter'
+                >
+                  left
+                </label>
+              </div>
+              <div class='form-check'>
+                <input
+                  class='form-check-input'
+                  type='checkbox'
+                  name='gridRadios'
+                  id='posts_right_section2_quarter'
+                  value='option1'
+                  checked
+                />
+                <label
+                  class='form-check-label'
+                  for='posts_right_section2_quarter'
+                >
+                  Right
+                </label>
+              </div>
+            </div>
+            <div class='col-4'>
+              <legend class='col-form-label col-sm-2 p-0'>Caps</legend>
+              <div class='form-check'>
+                <input
+                  class='form-check-input'
+                  type='checkbox'
+                  name='gridRadios'
+                  id='caps_left_section2_quarter'
+                  value='option1'
+                  checked
+                />
+                <label
+                  class='form-check-label'
+                  for='caps_left_section2_quarter'
+                >
+                  left
+                </label>
+              </div>
+              <div class='form-check'>
+                <input
+                  class='form-check-input'
+                  type='checkbox'
+                  name='gridRadios'
+                  id='caps_right_section2_quarter'
+                  value='option1'
+                  checked
+                />
+                <label
+                  class='form-check-label'
+                  for='caps_right_section2_quarter'
+                >
+                  Right
+                </label>
+              </div>
+            </div>
+            <div class='col-4'>
+              <legend class='col-form-label col-sm-2 p-0'>Handrail</legend>
+              <div class='form-check'>
+                <input
+                  class='form-check-input'
+                  type='checkbox'
+                  name='gridRadios'
+                  id='spindles_left_section2_quarter'
+                  value='option1'
+                  checked
+                />
+                <label
+                  class='form-check-label'
+                  for='spindles_left_section2_quarter'
+                >
+                  left
+                </label>
+              </div>
+              <div class='form-check'>
+                <input
+                  class='form-check-input'
+                  type='checkbox'
+                  name='gridRadios'
+                  id='spindles_right_section2_quarter'
+                  value='option1'
+                  checked
+                />
+                <label
+                  class='form-check-label'
+                  for='spindles_right_section2_quarter'
+                >
+                  Right
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
+        <button id='create_quarter_turn_stair'>Generate</button>
+      </div>
+    </div>
+    <div
+      class='tab-pane fade show active'
+      id='halfturn-tab-pane'
+      role='tabpanel'
+      aria-labelledby='halfturn-tab'
+      tabindex='2'
+    >
+      <div class='row px-3 pt-3'>
+        <div class='col-2 row'>
+          <div class='mb-3 row'>
+            <label for='half_turn_width' class='col-sm-2 col-form-label'
+            >Width</label
+            >
+            <div class='col-sm-10'>
+              <input
+                type='number'
+                class='form-control'
+                id='half_turn_width'
+                value='900'
+              />
+            </div>
+          </div>
+          <div class='mb-3 row'>
+            <label for='half_turn_height' class='col-sm-2 col-form-label'
+            >Height</label
+            >
+            <div class='col-sm-10'>
+              <input
+                type='number'
+                class='form-control'
+                id='half_turn_height'
+                value='2600'
+              />
+            </div>
+          </div>
+          <div class='mb-3 row'>
+            <label for='half_turn_going' class='col-sm-2 col-form-label'
+            >Going</label
+            >
+            <div class='col-sm-10'>
+              <input
+                type='number'
+                class='form-control'
+                id='half_turn_going'
+                value='240'
+              />
+            </div>
+          </div>
+          <div class='mb-3 row'>
+            <label for='direction_half' class='col-sm-2 col-form-label'
+            >Direction</label
+            >
+            <div class='col-sm-10'>
+              <select id='direction_half' class='form-select'>
+                <option value='LEFT' selected>LEFT</option>
+                <option value='RIGHT'>RIGHT</option>
+              </select>
+            </div>
+          </div>
+          <div class='mb-1 row'>
+            <label for='feature_tread_half' class='col-sm-2 col-form-label'
+            >Feature Tread</label
+            >
+            <div class='col-sm-8'>
+              <select id='feature_tread_half' class='form-select'>
+                <option value='n' selected>None</option>
+                <option value='lbs' selected>Left Bullnose Step</option>
+                <option value='rbs'>Right Bullnose Step</option>
+                <option value='dbs'>Double Bullnose Step</option>
+                <option value='lds'>Left D Step</option>
+                <option value='rds'>Right D Step</option>
+                <option value='dds'>Double D Step</option>
+                <option value='lcs'>Left Curtail Step</option>
+                <option value='rcs'>Right Curtail Step</option>
+                <option value='dcs'>Double Curtail Step</option>
+                <option value='lcbs'>Left Curtail and Bullnose Step</option>
+                <option value='rcbs'>Right Curtail and Bullnose Step</option>
+                <option value='dcbs'>Double Curtail and Bullnose Step</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class='col-2 row'>
+          <p class='fs-6 fw-bold'>Section 1</p>
+          <div class='row'>
+            <div class='mb-1 row'>
+              <label for='half_section1_num' class='col-sm-4 col-form-label'
+              >Count</label
+              >
+              <div class='col-sm-8'>
+                <input
+                  type='number'
+                  class='form-control'
+                  id='half_section1_num'
+                  value='2'
+                />
+              </div>
+            </div>
+          </div>
+          <div class='row'>
+            <div class='col-4'>
+              <legend class='col-form-label col-sm-2 p-0'>Posts</legend>
+              <div class='form-check'>
+                <input
+                  class='form-check-input'
+                  type='checkbox'
+                  name='gridRadios'
+                  id='posts_left_section1_half'
+                  value='option1'
+                  checked
+                />
+                <label
+                  class='form-check-label'
+                  for='posts_left_section1_half'
+                >
+                  left
+                </label>
+              </div>
+              <div class='form-check'>
+                <input
+                  class='form-check-input'
+                  type='checkbox'
+                  name='gridRadios'
+                  id='posts_right_section1_half'
+                  value='option1'
+                  checked
+                />
+                <label
+                  class='form-check-label'
+                  for='posts_right_section1_half'
+                >
+                  Right
+                </label>
+              </div>
+            </div>
+            <div class='col-4'>
+              <legend class='col-form-label col-sm-2 p-0'>Caps</legend>
+              <div class='form-check'>
+                <input
+                  class='form-check-input'
+                  type='checkbox'
+                  name='gridRadios'
+                  id='caps_left_section1_half'
+                  value='option1'
+                  checked
+                />
+                <label class='form-check-label' for='caps_left_section1_half'>
+                  left
+                </label>
+              </div>
+              <div class='form-check'>
+                <input
+                  class='form-check-input'
+                  type='checkbox'
+                  name='gridRadios'
+                  id='caps_right_section1_half'
+                  value='option1'
+                  checked
+                />
+                <label
+                  class='form-check-label'
+                  for='caps_right_section1_half'
+                >
+                  Right
+                </label>
+              </div>
+            </div>
+            <div class='col-4'>
+              <legend class='col-form-label col-sm-2 p-0'>Handrail</legend>
+              <div class='form-check'>
+                <input
+                  class='form-check-input'
+                  type='checkbox'
+                  name='gridRadios'
+                  id='spindles_left_section1_half'
+                  value='option1'
+                  checked
+                />
+                <label
+                  class='form-check-label'
+                  for='spindles_left_section1_half'
+                >
+                  left
+                </label>
+              </div>
+              <div class='form-check'>
+                <input
+                  class='form-check-input'
+                  type='checkbox'
+                  name='gridRadios'
+                  id='spindles_right_section1_half'
+                  value='option1'
+                  checked
+                />
+                <label
+                  class='form-check-label'
+                  for='spindles_right_section1_half'
+                >
+                  Right
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class='col-2 row'>
+          <p class='fs-6 fw-bold'>Box 1</p>
+          <div class='row'>
+            <div class='mb-3 row'>
+              <label for='turn_box1_half' class='col-sm-4 col-form-label'
+              >Turn</label
+              >
+              <div class='col-sm-8'>
+                <select id='turn_box1_half' class='form-select'>
+                  <option value='1'>1</option>
+                  <option value='2' selected>2</option>
+                  <option value='3'>3</option>
+                  <option value='4'>4</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <div class='row'>
+            <div class='col-4'>
+              <legend class='col-form-label col-sm-2 p-0'>Posts</legend>
+              <div class='form-check'>
+                <input
+                  class='form-check-input'
+                  type='checkbox'
+                  name='gridRadios'
+                  id='posts_top_outside_box1_half'
+                  value='option1'
+                  checked
+                />
+                <label
+                  class='form-check-label'
+                  for='posts_top_outside_box1_half'
+                >
+                  Top OutSide
+                </label>
+              </div>
+              <div class='form-check'>
+                <input
+                  class='form-check-input'
+                  type='checkbox'
+                  name='gridRadios'
+                  id='posts_bottom_outside_box1_half'
+                  value='option1'
+                  checked
+                />
+                <label
+                  class='form-check-label'
+                  for='posts_bottom_outside_box1_half'
+                >
+                  Bottom Outside
+                </label>
+              </div>
+              <div class='form-check'>
+                <input
+                  class='form-check-input'
+                  type='checkbox'
+                  name='gridRadios'
+                  id='posts_corner_box1_half'
+                  value='option1'
+                  checked
+                />
+                <label class='form-check-label' for='posts_corner_box1_half'>
+                  Corner
+                </label>
+              </div>
+            </div>
+            <div class='col-4'>
+              <legend class='col-form-label col-sm-2 p-0'>Caps</legend>
+              <div class='form-check'>
+                <input
+                  class='form-check-input'
+                  type='checkbox'
+                  name='gridRadios'
+                  id='caps_top_outside_box1_half'
+                  value='option1'
+                  checked
+                />
+                <label
+                  class='form-check-label'
+                  for='caps_top_outside_box1_half'
+                >
+                  Top OutSide
+                </label>
+              </div>
+              <div class='form-check'>
+                <input
+                  class='form-check-input'
+                  type='checkbox'
+                  name='gridRadios'
+                  id='caps_bottom_outside_box1_half'
+                  value='option1'
+                  checked
+                />
+                <label
+                  class='form-check-label'
+                  for='caps_bottom_outside_box1_half'
+                >
+                  Bottom Outside
+                </label>
+              </div>
+              <div class='form-check'>
+                <input
+                  class='form-check-input'
+                  type='checkbox'
+                  name='gridRadios'
+                  id='caps_corner_box1_half'
+                  value='option1'
+                  checked
+                />
+                <label class='form-check-label' for='caps_corner_box1_half'>
+                  Corner
+                </label>
+              </div>
+            </div>
+            <div class='col-4'>
+              <legend class='col-form-label col-sm-2 p-0'>Spindles</legend>
+              <div class='form-check'>
+                <input
+                  class='form-check-input'
+                  type='checkbox'
+                  name='gridRadios'
+                  id='spindles_left_box1_turn'
+                  value='option1'
+                  checked
+                />
+                <label class='form-check-label' for='spindles_left_box1_turn'>
+                  Left
+                </label>
+              </div>
+              <div class='form-check'>
+                <input
+                  class='form-check-input'
+                  type='checkbox'
+                  name='gridRadios'
+                  id='spindles_right_box1_turn'
+                  value='option1'
+                  checked
+                />
+                <label
+                  class='form-check-label'
+                  for='spindles_right_box1_turn'
+                >
+                  Right
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class='col-2 row'>
+          <p class='fs-6 fw-bold'>Section 2</p>
+          <div class='row'>
+            <div class='mb-1 row'>
+              <label for='half_section2_num' class='col-sm-4 col-form-label'
+              >Count</label
+              >
+              <div class='col-sm-8'>
+                <input
+                  type='number'
+                  class='form-control'
+                  id='half_section2_num'
+                  value='3'
+                />
+              </div>
+            </div>
+          </div>
+          <div class='row'>
+            <div class='col-4'>
+              <legend class='col-form-label col-sm-2 p-0'>Posts</legend>
+              <div class='form-check'>
+                <input
+                  class='form-check-input'
+                  type='checkbox'
+                  name='gridRadios'
+                  id='posts_left_section2_half'
+                  value='option1'
+                  checked
+                />
+                <label
+                  class='form-check-label'
+                  for='posts_left_section2_half'
+                >
+                  left
+                </label>
+              </div>
+              <div class='form-check'>
+                <input
+                  class='form-check-input'
+                  type='checkbox'
+                  name='gridRadios'
+                  id='posts_right_section2_half'
+                  value='option1'
+                  checked
+                />
+                <label
+                  class='form-check-label'
+                  for='posts_right_section2_half'
+                >
+                  Right
+                </label>
+              </div>
+            </div>
+            <div class='col-4'>
+              <legend class='col-form-label col-sm-2 p-0'>Caps</legend>
+              <div class='form-check'>
+                <input
+                  class='form-check-input'
+                  type='checkbox'
+                  name='gridRadios'
+                  id='caps_left_section2_half'
+                  value='option1'
+                  checked
+                />
+                <label class='form-check-label' for='caps_left_section2_half'>
+                  left
+                </label>
+              </div>
+              <div class='form-check'>
+                <input
+                  class='form-check-input'
+                  type='checkbox'
+                  name='gridRadios'
+                  id='caps_right_section2_half'
+                  value='option1'
+                  checked
+                />
+                <label
+                  class='form-check-label'
+                  for='caps_right_section2_half'
+                >
+                  Right
+                </label>
+              </div>
+            </div>
+            <div class='col-4'>
+              <legend class='col-form-label col-sm-2 p-0'>Handrail</legend>
+              <div class='form-check'>
+                <input
+                  class='form-check-input'
+                  type='checkbox'
+                  name='gridRadios'
+                  id='spindles_left_section2_half'
+                  value='option1'
+                  checked
+                />
+                <label
+                  class='form-check-label'
+                  for='spindles_left_section2_half'
+                >
+                  left
+                </label>
+              </div>
+              <div class='form-check'>
+                <input
+                  class='form-check-input'
+                  type='checkbox'
+                  name='gridRadios'
+                  id='spindles_right_section2_half'
+                  value='option1'
+                  checked
+                />
+                <label
+                  class='form-check-label'
+                  for='spindles_right_section2_half'
+                >
+                  Right
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class='col-2 row'>
+          <p class='fs-6 fw-bold'>Box2</p>
+          <div class='row'>
+            <div class='mb-3 row'>
+              <label for='turn_box2_half' class='col-sm-4 col-form-label'
+              >Turn</label
+              >
+              <div class='col-sm-8'>
+                <select id='turn_box2_half' class='form-select'>
+                  <option value='0'>0</option>
+                  <option value='1'>1</option>
+                  <option value='2'>2</option>
+                  <option value='3' selected>3</option>
+                  <option value='4'>4</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <div class='row'>
+            <div class='col-4'>
+              <legend class='col-form-label col-sm-2 p-0'>Posts</legend>
+              <div class='form-check'>
+                <input
+                  class='form-check-input'
+                  type='checkbox'
+                  name='gridRadios'
+                  id='posts_top_outside_box2_half'
+                  value='option1'
+                  checked
+                />
+                <label
+                  class='form-check-label'
+                  for='posts_top_outside_box2_half'
+                >
+                  Top OutSide
+                </label>
+              </div>
+              <div class='form-check'>
+                <input
+                  class='form-check-input'
+                  type='checkbox'
+                  name='gridRadios'
+                  id='posts_bottom_outside_box2_half'
+                  value='option1'
+                  checked
+                />
+                <label
+                  class='form-check-label'
+                  for='posts_bottom_outside_box2_half'
+                >
+                  Bottom Outside
+                </label>
+              </div>
+              <div class='form-check'>
+                <input
+                  class='form-check-input'
+                  type='checkbox'
+                  name='gridRadios'
+                  id='posts_corner_box2_half'
+                  value='option1'
+                  checked
+                />
+                <label class='form-check-label' for='posts_corner_box2_half'>
+                  Corner
+                </label>
+              </div>
+            </div>
+            <div class='col-4'>
+              <legend class='col-form-label col-sm-2 p-0'>Caps</legend>
+              <div class='form-check'>
+                <input
+                  class='form-check-input'
+                  type='checkbox'
+                  name='gridRadios'
+                  id='caps_top_outside_box2_half'
+                  value='option1'
+                  checked
+                />
+                <label
+                  class='form-check-label'
+                  for='caps_top_outside_box2_half'
+                >
+                  Top OutSide
+                </label>
+              </div>
+              <div class='form-check'>
+                <input
+                  class='form-check-input'
+                  type='checkbox'
+                  name='gridRadios'
+                  id='caps_bottom_outside_box2_half'
+                  value='option1'
+                  checked
+                />
+                <label
+                  class='form-check-label'
+                  for='caps_bottom_outside_box2_half'
+                >
+                  Bottom Outside
+                </label>
+              </div>
+              <div class='form-check'>
+                <input
+                  class='form-check-input'
+                  type='checkbox'
+                  name='gridRadios'
+                  id='caps_corner_box2_half'
+                  value='option1'
+                  checked
+                />
+                <label class='form-check-label' for='caps_corner_box2_half'>
+                  Corner
+                </label>
+              </div>
+            </div>
+            <div class='col-4'>
+              <legend class='col-form-label col-sm-2 p-0'>Spindles</legend>
+              <div class='form-check'>
+                <input
+                  class='form-check-input'
+                  type='checkbox'
+                  name='gridRadios'
+                  id='spindles_left_box2_turn'
+                  value='option1'
+                  checked
+                />
+                <label class='form-check-label' for='spindles_left_box2_turn'>
+                  Left
+                </label>
+              </div>
+              <div class='form-check'>
+                <input
+                  class='form-check-input'
+                  type='checkbox'
+                  name='gridRadios'
+                  id='spindles_right_box2_turn'
+                  value='option1'
+                  checked
+                />
+                <label
+                  class='form-check-label'
+                  for='spindles_right_box2_turn'
+                >
+                  Right
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class='col-2 row'>
+          <p class='fs-6 fw-bold'>Section 3</p>
+          <div class='row'>
+            <div class='mb-1 row'>
+              <label for='half_section3_num' class='col-sm-4 col-form-label'
+              >Count</label
+              >
+              <div class='col-sm-8'>
+                <input
+                  type='number'
+                  class='form-control'
+                  id='half_section3_num'
+                  readonly
+                  value='3'
+                />
+              </div>
+            </div>
+          </div>
+          <div class='row'>
+            <div class='col-4'>
+              <legend class='col-form-label col-sm-2 p-0'>Posts</legend>
+              <div class='form-check'>
+                <input
+                  class='form-check-input'
+                  type='checkbox'
+                  name='gridRadios'
+                  id='posts_left_section3_half'
+                  value='option1'
+                  checked
+                />
+                <label
+                  class='form-check-label'
+                  for='posts_left_section3_half'
+                >
+                  left
+                </label>
+              </div>
+              <div class='form-check'>
+                <input
+                  class='form-check-input'
+                  type='checkbox'
+                  name='gridRadios'
+                  id='posts_right_section3_half'
+                  value='option1'
+                  checked
+                />
+                <label
+                  class='form-check-label'
+                  for='posts_right_section3_half'
+                >
+                  Right
+                </label>
+              </div>
+            </div>
+            <div class='col-4'>
+              <legend class='col-form-label col-sm-2 p-0'>Caps</legend>
+              <div class='form-check'>
+                <input
+                  class='form-check-input'
+                  type='checkbox'
+                  name='gridRadios'
+                  id='caps_left_section3_half'
+                  value='option1'
+                  checked
+                />
+                <label class='form-check-label' for='caps_left_section3_half'>
+                  left
+                </label>
+              </div>
+              <div class='form-check'>
+                <input
+                  class='form-check-input'
+                  type='checkbox'
+                  name='gridRadios'
+                  id='caps_right_section3_half'
+                  value='option1'
+                  checked
+                />
+                <label
+                  class='form-check-label'
+                  for='caps_right_section3_half'
+                >
+                  Right
+                </label>
+              </div>
+            </div>
+            <div class='col-4'>
+              <legend class='col-form-label col-sm-2 p-0'>Handrail</legend>
+              <div class='form-check'>
+                <input
+                  class='form-check-input'
+                  type='checkbox'
+                  name='gridRadios'
+                  id='spindles_left_section3_half'
+                  value='option1'
+                  checked
+                />
+                <label
+                  class='form-check-label'
+                  for='spindles_left_section3_half'
+                >
+                  left
+                </label>
+              </div>
+              <div class='form-check'>
+                <input
+                  class='form-check-input'
+                  type='checkbox'
+                  name='gridRadios'
+                  id='spindles_right_section3_half'
+                  value='option1'
+                  checked
+                />
+                <label
+                  class='form-check-label'
+                  for='spindles_right_section3_half'
+                >
+                  Right
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class='row mb-3 px-3'>
+        <div class='col-6 row'>
+          <div class='col-3 row'>
+            <label for='post_type_half' class='col-sm-4 col-form-label'
+            >POST</label
+            >
+            <div class='col-sm-8'>
+              <select id='post_type_half' class='form-select'>
+                <option value='SQUARE' selected>SQUARE</option>
+                <option value='CHAMFERED'>CHAMFERED</option>
+                <option value='TURNED'>TURNED</option>
+                <option value='BASE'>BASE</option>
+              </select>
+            </div>
+          </div>
+          <div class='col-3 row'>
+            <label for='caps_type_half' class='col-sm-4 col-form-label'
+            >Cap</label
+            >
+            <div class='col-sm-8'>
+              <select id='caps_type_half' class='form-select'>
+                <option value='BALL' selected>Ball</option>
+                <option value='PYRAMID'>Pyramid</option>
+              </select>
+            </div>
+          </div>
+          <div class='col-3 row'>
+            <label for='spindle_type_half' class='col-sm-4 col-form-label'
+            >Spindle</label
+            >
+            <div class='col-sm-8'>
+              <select id='spindle_type_half' class='form-select'>
+                <option value='CHAMFERED' selected>CHAMFERED</option>
+                <option value='EDWARDIAN'>EDWARDIAN</option>
+                <option value='TWIST'>TWIST</option>
+                <option value='FLUTED'>FLUTED</option>
+                <option value='TULIP'>TULIP</option>
+                <option value='VICTORIAN'>VICTORIAN</option>
+                <option value='PROVINCIAL'>PROVINCIAL</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class='col-6 row'>
+          <div class='col-3 row'>
+            <label for='post_material_half' class='col-sm-4 col-form-label'
+            >POST</label
+            >
+            <div class='col-sm-8'>
+              <select id='post_material_half' class='form-select'>
+                <option value='OAK'>OAK</option>
+                <option value='PINE' selected>PINE</option>
+              </select>
+            </div>
+          </div>
+          <div class='col-3 row'>
+            <label for='cap_material_half' class='col-sm-4 col-form-label'
+            >CAP</label
+            >
+            <div class='col-sm-8'>
+              <select id='cap_material_half' class='form-select'>
+                <option value='OAK'>OAK</option>
+                <option value='PINE' selected>PINE</option>
+              </select>
+            </div>
+          </div>
+          <div class='col-3 row'>
+            <label for='spindle_material_half' class='col-sm-4 col-form-label'
+            >SPINDLE</label
+            >
+            <div class='col-sm-8'>
+              <select id='spindle_material_half' class='form-select'>
+                <option value='OAK'>OAK</option>
+                <option value='PINE' selected>PINE</option>
+              </select>
+            </div>
+          </div>
+          <div class='col-3 row'>
+            <label
+              for='base_rail_material_half'
+              class='col-sm-4 col-form-label'
+            >BASERAIL</label
+            >
+            <div class='col-sm-8'>
+              <select id='base_rail_material_half' class='form-select'>
+                <option value='OAK'>OAK</option>
+                <option value='PINE' selected>PINE</option>
+              </select>
+            </div>
+          </div>
+        </div>
+      </div>
+      <button class='w-100' id='create_half_turn_stair'>Generate</button>
+    </div>
+  </div>
+  <script
+    src='https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js'
+    integrity='sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN'
+    crossorigin='anonymous'
+  ></script>
+</body>
+</html>
